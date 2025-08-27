@@ -12,7 +12,7 @@ Welcome! This repository showcases my **Machine Learning journey (July–Dec 202
 - **Specialties:** Supervised ML, Recommender Systems, Computer Vision, NLP  
 - **Full-Stack:** Flask/Django, PostgreSQL, deployment on Render/Heroku  
 - **Projects:**  
-  - 🧪 **Titanic Survival Predictor** – EDA + classification  
+  - 🧪 **Titanic Survival Predictor** – EDA + classification  (https://github.com/ViceCityGhost/-Titanic-Survival-Prediction-Project)
   - 🧠 **Iris/Wine Classifier** – model training & evaluation  
   - 🎬 **Movie Recommender System** – ML + Flask + PostgreSQL  
   - 🖼️ **Image Classifier** – CNNs on MNIST/CIFAR  
