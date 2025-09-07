@@ -1,0 +1,68 @@
+# Week 5 — Hyperparameter Tuning & Cross-Validation
+
+**Dates:** July 15 – Aug 31  
+**Goal:** Get confident with model selection by doing proper cross-validation and hyperparameter tuning (Grid / Randomized Search) on both a **classification** and a **regression** task, then save the best models and summarize results.
+
+---
+
+## Datasets
+- **Classification:** `sklearn.datasets.load_breast_cancer` (binary labels)
+- **Regression:** `sklearn.datasets.load_diabetes` (continuous target)
+
+## Methods
+- **Cross-Validation**
+  - Classification: `StratifiedKFold`
+  - Regression: `KFold`
+- **Pipelines:** `StandardScaler` + estimator to keep preprocessing **inside** CV
+- **Tuning:** `GridSearchCV` for small, discrete spaces; `RandomizedSearchCV` (and optional Halving) for wider spaces
+- **Metrics**
+  - Classification: ROC-AUC (primary), F1, Accuracy
+  - Regression: RMSE (`neg_root_mean_squared_error` in CV; `root_mean_squared_error` on test)
+
+---
+
+## Models Evaluated
+
+### Classification
+- **Logistic Regression** (with `C`, `penalty` grid)
+- **SVC (RBF)** (randomized search over `C`, `gamma`)
+- **RandomForestClassifier** (grid or randomized search)
+
+### Regression
+- **Linear Regression** (baseline)
+- **Ridge / Lasso** (grid over `alpha`)
+- **RandomForestRegressor** (randomized search; subsampling with `max_samples`)
+- *(Optional)* **HistGradientBoostingRegressor** (randomized search + early stopping)
+
+---
+
+## Results
+
+### 🧪 Classification (Breast Cancer)
+All tuned classifiers achieved strong ROC-AUC. See the generated leaderboard for exact numbers:
+- **File:** `models/classification_leaderboard.csv`
+- **Saved model:** `models/<top_classifier>.pkl`
+
+> Expected: tuned SVC or tuned Logistic typically ranks at or near the top on this dataset.  
+> (Your exact winner is recorded in the leaderboard CSV.)
+
+---
+
+### 📈 Regression (Diabetes)
+
+**Best model (by CV RMSE):** RandomForestRegressor (trimmed search, 3-fold CV)
+
+- **CV RMSE (mean):** `58.2477`
+- **Test RMSE:** `52.7218`
+- **Best params:**
+  ```json
+  {
+    "bootstrap": true,
+    "max_depth": 6,
+    "max_features": "log2",
+    "max_samples": 0.8,
+    "min_samples_leaf": 4,
+    "min_samples_split": 9,
+    "n_estimators": 159
+  }
+
